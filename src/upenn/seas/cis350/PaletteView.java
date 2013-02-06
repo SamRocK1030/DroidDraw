@@ -22,7 +22,8 @@ public class PaletteView extends View {
 							square_3,
 							square_4,
 							square_5,
-							color_select;
+							color_select,
+							stroke_select;
 	
 	static int color;
 	static int strokeWidth;
@@ -72,13 +73,17 @@ public class PaletteView extends View {
 	   color_select.getPaint().setStrokeWidth(5);
 	   color_select.getPaint().setColor(Color.GRAY);
 	   
+	   stroke_select = new ShapeDrawable(new RectShape());
+	   stroke_select.setBounds(150, 20, 190, 50);
+	   stroke_select.getPaint().setStyle(Style.STROKE);
+	   stroke_select.getPaint().setStrokeWidth(5);
+	   stroke_select.getPaint().setColor(Color.GRAY);
+	   
 	   p = new Paint();
 	   time = "0:00";
 	   timer_secs = 0;
 	   color = square_1.getPaint().getColor();
 	   strokeWidth = 2;
-	   
-	  // pBView = (PaintBrushView)((Activity)this.getContext()).findViewById(R.id.paintbrush);
 	   
 	   new TimerTask().execute(timer_secs);
 
@@ -93,6 +98,7 @@ public class PaletteView extends View {
 	     square_5.draw(canvas);
 	     
 	     color_select.draw(canvas);
+	     stroke_select.draw(canvas);
 	     
 	       // set its color
 	     p.setColor(Color.BLACK);
@@ -147,12 +153,14 @@ public boolean onTouchEvent(MotionEvent e) {
 		}
 		else if (x > 150 && x <= 190) {
 			strokeWidth = 2;
+			stroke_select.setBounds(150, 20, 190, 50);
 			invalidate();
 			return true;
 		}
 		
 		else if (x > 200 && x <= 240) {
 			strokeWidth = 6;
+			stroke_select.setBounds(200, 20, 260, 50);
 			invalidate();
 			return true;
 		}
